@@ -2,7 +2,7 @@
  * @author Koen Bonnet, GOODGRID
  * @email koen@goodgrid.nl
  * @create date 2021-12-26 10:41:01
- * @modify date 2021-12-27 11:27:54
+ * @modify date 2021-12-27 11:47:02
  * @desc [description]
  */
 
@@ -84,8 +84,8 @@ app.post('/', (req, res) => {
                 res.send('Hook processed.');
             })
             .catch(error => {
-                console.log((error.response)?error:error.message)
-                res.status(500).send("Error in processing chain: " + error)
+                if (config.debug) console.log((error.response)?error.response:error.message)
+                res.status(500).send("Error in processing chain: " + error.message)
             })
         } else {
             res.status(500).send("No issue number found in document name. The project task needs to be manually aligned with the document status.")
